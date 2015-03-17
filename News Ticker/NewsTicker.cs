@@ -10,7 +10,6 @@ namespace News_Ticker
         private Timer timer = new Timer();
         const int MAX_DISTRICT_COUNT = 128;
         private static System.Random rand = new System.Random();
-        string cityName;
 
         public override void OnCreated(IChirper threading)
         {
@@ -18,7 +17,6 @@ namespace News_Ticker
 
             try
             {
-                cityName = Singleton<CityInfoPanel>.instance.GetCityName();
                 timer.AutoReset = true;
                 timer.Elapsed += new ElapsedEventHandler((sender, e) => AddMessage());
                 timer.Interval = 15000;
@@ -63,7 +61,7 @@ namespace News_Ticker
         {
             string message = getRandomMessage();
 
-            return message.Replace("city", cityName);
+            return message.Replace("city", CityInfoPanel.instance.GetCityName());
         }
 
         private string getRandomMessage()
