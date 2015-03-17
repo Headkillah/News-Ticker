@@ -21,7 +21,7 @@ namespace News_Ticker
                 cityName = Singleton<CityInfoPanel>.instance.GetCityName();
                 timer.AutoReset = true;
                 timer.Elapsed += new ElapsedEventHandler((sender, e) => AddMessage());
-                timer.Interval = 300000;
+                timer.Interval = 15000;
                 timer.Start();
             }
             catch (Exception ex)
@@ -49,7 +49,7 @@ namespace News_Ticker
         {
             try
             {
-                NewsTickerMessage m = new NewsTickerMessage(generateMessage());
+                Message m = new Message("News Ticker", "Placeholder", generateMessage());
                 MessageManager.instance.QueueMessage(m);
 
             }

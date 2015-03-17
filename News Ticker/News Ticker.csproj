@@ -54,7 +54,7 @@
     <Compile Include="Log.cs" />
     <Compile Include="ModInfo.cs" />
     <Compile Include="NewsTicker.cs" />
-    <Compile Include="NewsTickerMessage.cs" />
+    <Compile Include="Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
