@@ -25,16 +25,5 @@
 
             return newsTickerMessage != null && this.m_text == newsTickerMessage.m_text;
         }
-
-        public override void Serialize(ColossalFramework.IO.DataSerializer s)
-        {
-            s.WriteSharedString(m_text);
-
-        }
-
-        public override void Deserialize(ColossalFramework.IO.DataSerializer s)
-        {
-            m_text = s.ReadSharedString();
-        }
     }
 }

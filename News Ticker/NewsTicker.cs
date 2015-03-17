@@ -59,6 +59,18 @@ namespace News_Ticker
             }
         }
 
+        private string generateMessage()
+        {
+            string message = getRandomMessage();
+
+            return message.Replace("city", cityName);
+        }
+
+        private string getRandomMessage()
+        {
+            return Messages[rand.Next(Messages.Length + 1)];
+        }
+
         #region Messages
         private readonly string[] Messages = new string[] {
 "Today's Forecast: Cold, Cloudy, With Occasional Showers",
@@ -310,18 +322,6 @@ namespace News_Ticker
 "If Tin Whistles Are Made Of Tin, What Do They Make Foghorns Out Of?",
         };
         #endregion
-
-        private string generateMessage()
-        {
-            string message = getRandomMessage();
-
-            return message.Replace("city", cityName);
-        }
-
-        private string getRandomMessage()
-        {
-            return Messages[rand.Next(Messages.Length + 1)];
-        }
 
     }
 }
