@@ -2,7 +2,7 @@
 
 namespace News_Ticker
 {
-    class ModInfo : IUserMod
+    public class ModInfo : IUserMod
     {
         public string Description
         {

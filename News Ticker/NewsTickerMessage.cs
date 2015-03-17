@@ -1,6 +1,6 @@
 ﻿namespace News_Ticker
 {
-    class NewsTickerMessage : MessageBase
+    public class NewsTickerMessage : MessageBase
     {
         private string m_text;
         private string m_author = "News Ticker";
