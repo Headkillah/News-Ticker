@@ -1,27 +1,10 @@
 ﻿using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
 using ICities;
-//using UnityEngine;
 using System.Timers;
 using ColossalFramework;
 
 namespace News_Ticker
 {
-    public class ModInfo : IUserMod
-    {
-        public string Description
-        {
-            get { return "Show messages from the SimCity 3000 News Ticker"; }
-        }
-
-        public string Name
-        {
-            get { return "SimCity 3000 News Ticker"; }
-        }
-    }
-
     public class NewsTicker : ChirperExtensionBase
     {
         private Timer timer = new Timer();
@@ -31,14 +14,14 @@ namespace News_Ticker
 
         public override void OnCreated(IChirper threading)
         {
-            DebugOutputPanel.AddMessage(ColossalFramework.Plugins.PluginManager.MessageType.Message, "News Ticker Loaded Successfully");
+            Log.AddMessage("News Ticker Loaded Successfully");
 
             try
             {
                 cityName = Singleton<CityInfoPanel>.instance.GetCityName();
                 timer.AutoReset = true;
                 timer.Elapsed += new ElapsedEventHandler((sender, e) => AddMessage());
-                timer.Interval = 600000;
+                timer.Interval = 15000;
                 timer.Start();
             }
             catch (Exception ex)
@@ -51,14 +34,12 @@ namespace News_Ticker
         public override void OnReleased()
         {
             endTimer();
-            Log.AddMessage("News Ticker Unloaded");
         }
 
         private void endTimer()
         {
             if (timer != null)
             {
-                Log.AddMessage("Stopping News Ticker Timer");
                 timer.Stop();
                 timer.Dispose();
             }
@@ -342,57 +323,5 @@ namespace News_Ticker
             return Messages[rand.Next(Messages.Length + 1)];
         }
 
-    }
-
-    public class NewsTickerMessage : MessageBase
-    {
-        private string m_text;
-        private string m_author = "News Ticker";
-        public NewsTickerMessage(string message)
-        {
-            m_text = message;
-        }
-
-        public override string GetText()
-        {
-            return m_text;
-        }
-
-        public override string GetSenderName()
-        {
-            return m_author;
-        }
-
-        public override bool IsSimilarMessage(MessageBase other)
-        {
-            NewsTickerMessage newsTickerMessage = other as NewsTickerMessage;
-
-            return newsTickerMessage != null && this.m_text == newsTickerMessage.m_text;
-        }
-
-        public override void Serialize(ColossalFramework.IO.DataSerializer s)
-        {
-            s.WriteSharedString(m_text);
-
-        }
-
-        public override void Deserialize(ColossalFramework.IO.DataSerializer s)
-        {
-            m_text = s.ReadSharedString();
-        }
-    }
-
-    public static class Log
-    {
-        public static void AddMessage(string message)
-        {
-            DebugOutputPanel.AddMessage(ColossalFramework.Plugins.PluginManager.MessageType.Message, message);
-        }
-
-        public static void AddError(string error)
-        {
-            error = "[News Ticker] " + error;
-            DebugOutputPanel.AddMessage(ColossalFramework.Plugins.PluginManager.MessageType.Error, error);
-        }
     }
 }
