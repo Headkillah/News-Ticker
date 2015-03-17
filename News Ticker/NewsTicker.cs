@@ -21,7 +21,7 @@ namespace News_Ticker
                 cityName = Singleton<CityInfoPanel>.instance.GetCityName();
                 timer.AutoReset = true;
                 timer.Elapsed += new ElapsedEventHandler((sender, e) => AddMessage());
-                timer.Interval = 15000;
+                timer.Interval = 300000;
                 timer.Start();
             }
             catch (Exception ex)
